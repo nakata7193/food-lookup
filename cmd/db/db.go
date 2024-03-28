@@ -10,6 +10,7 @@ import (
 func DbInit() *model.FoodRepo {
 	db, err := sql.Open("sqlite", "food.db")
 	if err != nil {
+
 		panic(err)
 	}
 	repository := model.NewFoodRepo(db)

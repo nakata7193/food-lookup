@@ -20,6 +20,20 @@ func NewFoodRepo(db *sql.DB) *FoodRepo {
 	return &FoodRepo{db: db}
 }
 
+func (r *FoodRepo) CreateTableIfNotExists() error {
+	_, err := r.db.Exec(`CREATE TABLE IF NOT EXISTS foods (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description VARCHAR(255) NOT NULL,
+    carbs DECIMAL(10,2) NOT NULL,
+    protein DECIMAL(10,2) NOT NULL,
+    fat DECIMAL(10,2) NOT NULL
+)`)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *FoodRepo) GetFoodByID(id int) (*Food, error) {
 	food := &Food{}
 	err := r.db.QueryRow("SELECT * FROM foods WHERE id = ?", id).Scan(&food.ID, &food.Description, &food.Carbs, &food.Protein, &food.Fat)
@@ -63,4 +77,3 @@ func (r *FoodRepo) AddFood(food *Food) error {
 	}
 	return nil
 }
-

@@ -28,7 +28,7 @@ func GetAllFoods(data model.FoodRepo) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		foods, err := data.GetAllFoods()
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": "get all foods"})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
 		}
 		ctx.JSON(http.StatusOK, foods)
 	}

@@ -15,6 +15,11 @@ func main() {
 	router := gin.Default()
 	gin.SetMode(gin.DebugMode)
 
+	err := repository.CreateTableIfNotExists()
+	if err != nil {
+		log.Fatalf("Error creating 'foods' table: %v", err)
+	}
+
 	router.GET("/health", controllers.HealthHandler())
 
 	router.GET("/api/food/:id", controllers.GetFood(*repository))
