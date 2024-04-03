@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SearchPage from './pages/SearchPage';
+import AddFoodPage from './pages/AddFoodPage';
 
 function App() {
+  const [page, setPage] = useState('search'); 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js asd</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => setPage('search')}>Search Foods</button>
+      <button onClick={() => setPage('add')}>Add Food</button>
+      {page === 'search' ? <SearchPage /> : <AddFoodPage />}
     </div>
   );
 }

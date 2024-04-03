@@ -39,7 +39,7 @@ func (r *FoodRepo) GetFoodByID(id int) (*Food, error) {
 	err := r.db.QueryRow("SELECT * FROM foods WHERE id = ?", id).Scan(&food.ID, &food.Description, &food.Carbs, &food.Protein, &food.Fat)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, nil // Return nil if no food found with the given ID
+			return nil, nil 
 		}
 		return nil, err
 	}
